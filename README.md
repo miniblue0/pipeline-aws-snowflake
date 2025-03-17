@@ -65,7 +65,7 @@ aws s3 cp --bucket pipeline-zip-to-snowflake/Published/
 aws sqs create-queue --queue-name parquet-notifications
 ```
 
-#### ** Amazon EventBridge - Trigger para automatizar el Job**
+#### **Amazon EventBridge - Trigger para automatizar el Job**
 - **Regla de eventbridge** La cree para que dispare el job `parquetJob` cada vez que se crea un archivo en la carpeta `/curated/`
 - **Detalles** Ver en `trigger-parquet-job.img`
 

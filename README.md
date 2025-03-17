@@ -7,6 +7,7 @@ Este proyecto implementa un pipeline de datos automatizado utilizando AWS y Snow
 - **AWS S3**: Almacenamiento de archivos en diferentes etapas del pipeline.
 - **AWS Lambda**: Procesamiento event-driven para extracción y notificación.
 - **AWS Glue**: Transformación de datos de CSV a Parquet.
+- **AWS EventBridge**: Automatizacion del Workflow de Glue
 - **AWS SQS**: Comunicación entre AWS y Snowflake.
 - **Snowflake**: Almacenamiento de datos transformados con Snowpipe.
 - **Python & Boto3**: Desarrollo de scripts en AWS Lambda.

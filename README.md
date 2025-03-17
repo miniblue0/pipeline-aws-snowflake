@@ -25,12 +25,13 @@ Este proyecto implementa un pipeline de datos automatizado utilizando AWS y Snow
 	├── parquetJob.png
 	├── SQSQueue.png
 	├── Snowflake.png
+	├── trigger-parquet-job.png
 ```
 
 ##  Flujo de Trabajo
 1. **Recepcion de Archivos:** Se reciben archivos ZIP a `s3://pipeline-zip-to-snowflake/landing/`.
 2. **Extracción:** AWS Lambda extrae los archivos CSV y los mueve a `s3://pipeline-zip-to-snowflake/curated/`.
-3. **Conversión a Parquet:** Un AWS Glue Job convierte los CSV a Parquet y los guarda en `s3://pipeline-zip-to-snowflake/Published/`.
+3. **Conversión automatica a Parquet:** Un AWS Glue Job convierte los CSV a Parquet y los guarda en `s3://pipeline-zip-to-snowflake/Published/`.
 4. **Notificación a SQS:** AWS Lambda envía un mensaje a una cola SQS cuando hay nuevos archivos Parquet.
 5. **Ingesta automatica en Snowflake:** Snowpipe detecta nuevos archivos y los carga en la base de datos de Snowflake.
 
@@ -63,6 +64,10 @@ aws s3 cp --bucket pipeline-zip-to-snowflake/Published/
 ```sh
 aws sqs create-queue --queue-name parquet-notifications
 ```
+
+#### ** Amazon EventBridge - Trigger para automatizar el Job**
+- **Regla de eventbridge** La cree para que dispare el job `parquetJob` cada vez que se crea un archivo en la carpeta `/curated/`
+- **Detalles** Ver en `trigger-parquet-job.img`
 
 ### 2️ Configuración en Snowflake
 #### **Base de Datos y Tabla**
